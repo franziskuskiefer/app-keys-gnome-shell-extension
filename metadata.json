@@ -1,0 +1,11 @@
+{
+  "description": "Adds Super+NUM shortcuts for activating applications from dash. No configurations necessary.\n\nForked from https://extensions.gnome.org/extension/413/dash-hotkeys/", 
+  "name": "AppKeys", 
+  "settings-schema": "org.gnome-shell-extension.franziskuskiefer.app-keys", 
+  "shell-version": [
+    "3.6"
+  ], 
+  "url": "", 
+  "uuid": "app-keys@franziskuskiefer.de", 
+  "version": 1
+}

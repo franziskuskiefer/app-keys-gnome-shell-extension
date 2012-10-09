@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions">
+  <schema path="/org/gnome-shell-extension/franziskuskiefer/app-keys/" id="org.gnome-shell-extension.franziskuskiefer.app-keys">
+    <key name="app-key1" type="as">
+      <default><![CDATA[['<Super>1']]]></default>
+      <summary>Keybinding to switch to 1. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 1. place in dash.
+      </description>
+    </key>
+    <key name="app-key2" type="as">
+      <default><![CDATA[['<Super>2']]]></default>
+      <summary>Keybinding to switch to 2. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 2. place in dash.
+      </description>
+    </key>
+    <key name="app-key3" type="as">
+      <default><![CDATA[['<Super>3']]]></default>
+      <summary>Keybinding to switch to 3. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 3. place in dash.
+      </description>
+    </key>
+    <key name="app-key4" type="as">
+      <default><![CDATA[['<Super>4']]]></default>
+      <summary>Keybinding to switch to 4. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 4. place in dash.
+      </description>
+    </key>
+    <key name="app-key5" type="as">
+      <default><![CDATA[['<Super>5']]]></default>
+      <summary>Keybinding to switch to 5. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 5. place in dash.
+      </description>
+    </key>
+    <key name="app-key6" type="as">
+      <default><![CDATA[['<Super>6']]]></default>
+      <summary>Keybinding to switch to 6. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 6. place in dash.
+      </description>
+    </key>
+    <key name="app-key7" type="as">
+      <default><![CDATA[['<Super>7']]]></default>
+      <summary>Keybinding to switch to 7. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 7. place in dash.
+      </description>
+    </key>
+    <key name="app-key8" type="as">
+      <default><![CDATA[['<Super>8']]]></default>
+      <summary>Keybinding to switch to 8. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 8. place in dash.
+      </description>
+    </key>
+    <key name="app-key9" type="as">
+      <default><![CDATA[['<Super>9']]]></default>
+      <summary>Keybinding to switch to 9. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 9. place in dash.
+      </description>
+    </key>
+  </schema>
+</schemalist>
