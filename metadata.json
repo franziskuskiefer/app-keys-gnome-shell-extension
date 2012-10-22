@@ -3,9 +3,13 @@
   "name": "AppKeys", 
   "settings-schema": "org.gnome-shell-extension.franziskuskiefer.app-keys", 
   "shell-version": [
-    "3.6"
+    "3.4",
+    "3.5",
+    "3.6",
+    "3.7",
+    "3.8"
   ], 
   "url": "https://github.com/franziskuskiefer/app-keys-gnome-shell-extension", 
   "uuid": "app-keys@franziskuskiefer.de", 
-  "version": 1
+  "version": 2
 }
