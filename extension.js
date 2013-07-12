@@ -42,7 +42,7 @@ function clickClosure(id) {
 }
 
 function enable() {
-    global.display.add_keybinding('app-key1', settings, Meta.KeyBindingFlags.NONE, clickClosure(0));
+    	global.display.add_keybinding('app-key1', settings, Meta.KeyBindingFlags.NONE, clickClosure(0));
 	Main.wm.setCustomKeybindingHandler('app-key1', Shell.KeyBindingMode.NORMAL, clickClosure(0));	
 	
 	global.display.add_keybinding('app-key2', settings, Meta.KeyBindingFlags.NONE, clickClosure(1));
@@ -57,9 +57,8 @@ function enable() {
 	global.display.add_keybinding('app-key5', settings, Meta.KeyBindingFlags.NONE, clickClosure(4));
 	Main.wm.setCustomKeybindingHandler('app-key5', Shell.KeyBindingMode.NORMAL, clickClosure(4));
 
-	gobal.display.add_keybinding('app-key6', settings, Meta.KeyBindingFlags.NONE, clickClosure(5));
+	global.display.add_keybinding('app-key6', settings, Meta.KeyBindingFlags.NONE, clickClosure(5));
 	Main.wm.setCustomKeybindingHandler('app-key6', Shell.KeyBindingMode.NORMAL, clickClosure(5));
-
 
 	global.display.add_keybinding('app-key7', settings, Meta.KeyBindingFlags.NONE, clickClosure(6));
 	Main.wm.setCustomKeybindingHandler('app-key7', Shell.KeyBindingMode.NORMAL, clickClosure(6));
