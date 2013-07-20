@@ -36,7 +36,7 @@ function clickClosure(id) {
 
 
         if(typeof(apps[id]) !== 'undefined') { //This is just to ignore problems when there is no such app (yet).
-	    apps[id].activate();
+        apps[id].activate();
             }
         }
 }
@@ -48,12 +48,12 @@ function enable() {
 
         global.display.add_keybinding('app-key-kp'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1));
         Main.wm.setCustomKeybindingHandler('app-key-kp'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1));
-    }    
+    }
 }
 
 function disable() {
     for(var i=1; i<10; i++) {
         global.display.remove_keybinding('app-key'+i);
-        global.display.remove_keybinding('app-key-kp'+i);    
-    }    
+        global.display.remove_keybinding('app-key-kp'+i);
+    }
 }
