@@ -64,5 +64,68 @@
         Keybinding to switch to the app which is in the 9. place in dash.
       </description>
     </key>
+    <key name="app-key-kp1" type="as">
+      <default><![CDATA[['<Super>KP_1']]]></default>
+      <summary>Keybinding to switch to 1. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 1. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp2" type="as">
+      <default><![CDATA[['<Super>KP_2']]]></default>
+      <summary>Keybinding to switch to 2. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 2. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp3" type="as">
+      <default><![CDATA[['<Super>KP_3']]]></default>
+      <summary>Keybinding to switch to 3. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 3. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp4" type="as">
+      <default><![CDATA[['<Super>KP_4']]]></default>
+      <summary>Keybinding to switch to 4. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 4. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp5" type="as">
+      <default><![CDATA[['<Super>KP_5']]]></default>
+      <summary>Keybinding to switch to 5. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 5. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp6" type="as">
+      <default><![CDATA[['<Super>KP_6']]]></default>
+      <summary>Keybinding to switch to 6. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 6. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp7" type="as">
+      <default><![CDATA[['<Super>KP_7']]]></default>
+      <summary>Keybinding to switch to 7. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 7. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp8" type="as">
+      <default><![CDATA[['<Super>KP_8']]]></default>
+      <summary>Keybinding to switch to 8. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 8. place in dash.
+      </description>
+    </key>
+    <key name="app-key-kp9" type="as">
+      <default><![CDATA[['<Super>KP_9']]]></default>
+      <summary>Keybinding to switch to 9. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 9. place in dash.
+      </description>
+    </key>
   </schema>
 </schemalist>
