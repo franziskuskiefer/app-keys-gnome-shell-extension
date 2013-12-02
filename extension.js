@@ -19,7 +19,8 @@ function init() {
 
 //This is a javascript-closure which will return the event handler
 //for each hotkey with it's id. (id=1 For <Super>+1 etc)
-function clickClosure(id) {
+function clickClosure(id, options) {
+    options = options || {};
     return function(){
         Dash._redisplay(); //Re-order apps in dash before loading
 
@@ -36,15 +37,21 @@ function clickClosure(id) {
 
 
         if(typeof(apps[id]) !== 'undefined') { //This is just to ignore problems when there is no such app (yet).
-        apps[id].activate();
-            }
+            if (options.newwindow)
+                apps[id].open_new_window(-1);
+            else
+                apps[id].activate();
         }
+    }
 }
 
 function enable() {
     for(var i=1; i<10; i++) {
         global.display.add_keybinding('app-key'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1));
         Main.wm.setCustomKeybindingHandler('app-key'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1));
+
+        global.display.add_keybinding('app-key-shift'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1, {newwindow: true}));
+        Main.wm.setCustomKeybindingHandler('app-key-shift'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1, {newwindow: true}));
 
         global.display.add_keybinding('app-key-kp'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1));
         Main.wm.setCustomKeybindingHandler('app-key-kp'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1));
@@ -54,6 +61,7 @@ function enable() {
 function disable() {
     for(var i=1; i<10; i++) {
         global.display.remove_keybinding('app-key'+i);
+        global.display.remove_keybinding('app-key-shift'+i);
         global.display.remove_keybinding('app-key-kp'+i);
     }
 }
