@@ -190,5 +190,68 @@
         Keybinding to open a new window for the app which is in the 9. place in dash.
       </description>
     </key>
+    <key name="app-key-shift-kp1" type="as">
+      <default><![CDATA[['<Shift><Super>KP_1']]]></default>
+      <summary>Keybinding to open a new window for 1. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 1. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp2" type="as">
+      <default><![CDATA[['<Shift><Super>KP_2']]]></default>
+      <summary>Keybinding to open a new window for 2. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 2. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp3" type="as">
+      <default><![CDATA[['<Shift><Super>KP_3']]]></default>
+      <summary>Keybinding to open a new window for 3. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 3. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp4" type="as">
+      <default><![CDATA[['<Shift><Super>KP_4']]]></default>
+      <summary>Keybinding to open a new window for 4. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 4. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp5" type="as">
+      <default><![CDATA[['<Shift><Super>KP_5']]]></default>
+      <summary>Keybinding to open a new window for 5. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 5. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp6" type="as">
+      <default><![CDATA[['<Shift><Super>KP_6']]]></default>
+      <summary>Keybinding to open a new window for 6. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 6. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp7" type="as">
+      <default><![CDATA[['<Shift><Super>KP_7']]]></default>
+      <summary>Keybinding to open a new window for 7. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 7. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp8" type="as">
+      <default><![CDATA[['<Shift><Super>KP_8']]]></default>
+      <summary>Keybinding to open a new window for 8. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 8. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp9" type="as">
+      <default><![CDATA[['<Shift><Super>KP_9']]]></default>
+      <summary>Keybinding to open a new window for 9. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 9. place in dash.
+      </description>
+    </key>
   </schema>
 </schemalist>

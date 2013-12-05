@@ -55,6 +55,9 @@ function enable() {
 
         global.display.add_keybinding('app-key-kp'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1));
         Main.wm.setCustomKeybindingHandler('app-key-kp'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1));
+        
+        global.display.add_keybinding('app-key-shift-kp'+i, settings, Meta.KeyBindingFlags.NONE, clickClosure(i-1, {newwindow: true}));
+        Main.wm.setCustomKeybindingHandler('app-key-shift-kp'+i, Shell.KeyBindingMode.NORMAL, clickClosure(i-1, {newwindow: true}));
     }
 }
 
@@ -63,5 +66,6 @@ function disable() {
         global.display.remove_keybinding('app-key'+i);
         global.display.remove_keybinding('app-key-shift'+i);
         global.display.remove_keybinding('app-key-kp'+i);
+        global.display.remove_keybinding('app-key-shift-kp'+i);
     }
 }
