@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extensions">
   <schema path="/org/gnome-shell-extension/franziskuskiefer/app-keys/" id="org.gnome-shell-extension.franziskuskiefer.app-keys">
+    <key name="use-num-keys" type="b">
+      <default>true</default>
+      <summary>Use number keys?</summary>
+      <description>
+        Do you want to use number?
+      </description>
+    </key>
     <key name="app-key1" type="as">
       <default><![CDATA[['<Super>1']]]></default>
       <summary>Keybinding to switch to 1. dash element</summary>
@@ -62,6 +69,13 @@
       <summary>Keybinding to switch to 9. dash element</summary>
       <description>
         Keybinding to switch to the app which is in the 9. place in dash.
+      </description>
+    </key>
+    <key name="use-kp-keys" type="b">
+      <default>true</default>
+      <summary>Use keypad keys?</summary>
+      <description>
+        Do you want to use keypads?
       </description>
     </key>
     <key name="app-key-kp1" type="as">
@@ -134,6 +148,13 @@
         Keybinding to open a new window for the app which is in the 1. place in dash.
       </description>
     </key>
+    <key name="use-nw" type="b">
+      <default>true</default>
+      <summary>Use new window keys?</summary>
+      <description>
+        Do you want to use shift to open new windows?
+      </description>
+    </key>
     <key name="app-key-shift2" type="as">
       <default><![CDATA[['<Shift><Super>2']]]></default>
       <summary>Keybinding to open a new window for 2. dash element</summary>
@@ -188,6 +209,13 @@
       <summary>Keybinding to open a new window for 9. dash element</summary>
       <description>
         Keybinding to open a new window for the app which is in the 9. place in dash.
+      </description>
+    </key>
+    <key name="use-kp-nw" type="b">
+      <default>true</default>
+      <summary>Use new window keys?</summary>
+      <description>
+        Do you want to use shift to open new windows?
       </description>
     </key>
     <key name="app-key-shift-kp1" type="as">
