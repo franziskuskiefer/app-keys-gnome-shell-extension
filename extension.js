@@ -61,9 +61,23 @@ AppKeys.prototype = {
 	},
 
 	toggleKeys: function() {
-		// TODO: could be done nice
+		// TODO: could be done nicer
 		this.disable();
 		this.enable();
+	},
+
+	_addKeybindings: function(name, handler) {
+		if (Main.wm.addKeybinding)
+        	Main.wm.addKeybinding(name, this.settings, Meta.KeyBindingFlags.NONE, Shell.KeyBindingMode.NORMAL, handler);
+		else
+		   global.display.add_keybinding(name, this.settings, Meta.KeyBindingFlags.NONE, handler);
+	},
+	
+	_removeKeybindings: function(name) {
+		if (Main.wm.removedKeybinding)
+        	Main.wm.removedKeybinding(name);
+		else
+		   global.display.remove_keybinding(name);
 	},
 
 	enable: function(){
@@ -73,34 +87,26 @@ AppKeys.prototype = {
 		let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
 	
 		for(var i=1; i<10; i++) {
-			if (enableNUM) {
-				global.display.add_keybinding('app-key'+i, this.settings, Meta.KeyBindingFlags.NONE, this.clickClosure(i-1));
-				Main.wm.setCustomKeybindingHandler('app-key'+i, Shell.KeyBindingMode.NORMAL, this.clickClosure(i-1));
-			}
+			if (enableNUM)
+				this._addKeybindings('app-key'+i, this.clickClosure(i-1));
 	
-			if (enableNW) {
-				global.display.add_keybinding('app-key-shift'+i, this.settings, Meta.KeyBindingFlags.NONE, this.clickClosure(i-1, {newwindow: true}));
-				Main.wm.setCustomKeybindingHandler('app-key-shift'+i, Shell.KeyBindingMode.NORMAL, this.clickClosure(i-1, {newwindow: true}));
-			}
+			if (enableNW)
+				this._addKeybindings('app-key-shift'+i, this.clickClosure(i-1, {newwindow: true}));
 
-			if (enableNKP) {
-				global.display.add_keybinding('app-key-shift-kp'+i, this.settings, Meta.KeyBindingFlags.NONE, this.clickClosure(i-1, {newwindow: true}));
-				Main.wm.setCustomKeybindingHandler('app-key-shift-kp'+i, Shell.KeyBindingMode.NORMAL, this.clickClosure(i-1, {newwindow: true}));
-		    }
+			if (enableNKP)
+				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(i-1, {newwindow: true}));
 
-			if (enableKP) {
-				global.display.add_keybinding('app-key-kp'+i, this.settings, Meta.KeyBindingFlags.NONE, this.clickClosure(i-1));
-				Main.wm.setCustomKeybindingHandler('app-key-kp'+i, Shell.KeyBindingMode.NORMAL, this.clickClosure(i-1));
-			}
+			if (enableKP)
+				this._addKeybindings('app-key-kp'+i, this.clickClosure(i-1));
 		}
 	},
 	
 	disable: function(){
 		for(var i=1; i<10; i++) {
-		    global.display.remove_keybinding('app-key'+i);
-		    global.display.remove_keybinding('app-key-shift'+i);
-		    global.display.remove_keybinding('app-key-kp'+i);
-		    global.display.remove_keybinding('app-key-shift-kp'+i);
+		    this._removeKeybindings('app-key'+i);
+		    this._removeKeybindings('app-key-shift'+i);
+		    this._removeKeybindings('app-key-kp'+i);
+		    this._removeKeybindings('app-key-shift-kp'+i);
 		}
 	}
 

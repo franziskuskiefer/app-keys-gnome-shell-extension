@@ -22,7 +22,6 @@ function init() {
 
     settings = new Gio.Settings({ settings_schema: schemaObj });
     
-//    settings.connect("changed::" + SETTINGS_USE_KEYPAD, Lang.bind(this,  this._onSettingsChanged));
 }
 
 function addSetting(vbox, label, tooltip, conf){
@@ -41,6 +40,7 @@ function addSetting(vbox, label, tooltip, conf){
     settingSwitch.connect("notify::active", function(button) {
         settings.set_boolean(conf, button.active);
     });
+    settings.bind(conf, settingSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
 
     settingLabel.set_tooltip_text(_(tooltip));
     settingSwitch.set_tooltip_text(_(tooltip));
@@ -55,7 +55,8 @@ function buildPrefsWidget() {
     let vbox = new Gtk.Box({
         orientation: Gtk.Orientation.VERTICAL,
         margin: 10,
-        margin_top: 15
+        margin_top: 15,
+        spacing: 10
     });
 
 	let label = "Enable Keypad";
