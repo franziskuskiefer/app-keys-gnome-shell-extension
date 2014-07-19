@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extensions">
-  <schema path="/org/gnome-shell-extension/franziskuskiefer/app-keys/" id="org.gnome-shell-extension.franziskuskiefer.app-keys">
+  <schema path="/org/gnome/shell/extensions/app-keys/" id="org.gnome.shell.extensions.app-keys">
     <key name="use-num-keys" type="b">
       <default>true</default>
       <summary>Use number keys?</summary>
