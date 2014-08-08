@@ -74,8 +74,8 @@ AppKeys.prototype = {
 	},
 	
 	_removeKeybindings: function(name) {
-		if (Main.wm.removedKeybinding)
-        	Main.wm.removedKeybinding(name);
+		if (Main.wm.removeKeybinding)
+        	Main.wm.removeKeybinding(name);
 		else
 		   global.display.remove_keybinding(name);
 	},

@@ -34,14 +34,8 @@ function addSetting(vbox, label, tooltip, conf){
         xalign: 0
     });
 
-    let settingSwitch = new Gtk.Switch({
-        active: settings.get_boolean(conf)
-    });
-    settingSwitch.connect("notify::active", function(button) {
-        settings.set_boolean(conf, button.active);
-    });
+    let settingSwitch = new Gtk.Switch();
     settings.bind(conf, settingSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
-
     settingLabel.set_tooltip_text(_(tooltip));
     settingSwitch.set_tooltip_text(_(tooltip));
 
