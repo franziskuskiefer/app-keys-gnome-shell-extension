@@ -86,23 +86,25 @@ AppKeys.prototype = {
 		let enableNW = this.settings.get_boolean(config.SETTINGS_USE_NW);
 		let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
 	
-		for(var i=1; i<10; i++) {
+		for(var i=0; i<10; i++) {
+			var j = i-1;
+			if (i == 0) j = 9;
 			if (enableNUM)
-				this._addKeybindings('app-key'+i, this.clickClosure(i-1));
+				this._addKeybindings('app-key'+i, this.clickClosure(j));
 	
 			if (enableNW)
-				this._addKeybindings('app-key-shift'+i, this.clickClosure(i-1, {newwindow: true}));
+				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true}));
 
 			if (enableNKP)
-				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(i-1, {newwindow: true}));
+				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true}));
 
 			if (enableKP)
-				this._addKeybindings('app-key-kp'+i, this.clickClosure(i-1));
+				this._addKeybindings('app-key-kp'+i, this.clickClosure(j));
 		}
 	},
 	
 	disable: function(){
-		for(var i=1; i<10; i++) {
+		for(var i=0; i<10; i++) {
 		    this._removeKeybindings('app-key'+i);
 		    this._removeKeybindings('app-key-shift'+i);
 		    this._removeKeybindings('app-key-kp'+i);

@@ -71,6 +71,13 @@
         Keybinding to switch to the app which is in the 9. place in dash.
       </description>
     </key>
+    <key name="app-key0" type="as">
+      <default><![CDATA[['<Super>0']]]></default>
+      <summary>Keybinding to switch to 10. dash element</summary>
+      <description>
+        Keybinding to switch to the app which is in the 10. place in dash.
+      </description>
+    </key>
     <key name="use-kp-keys" type="b">
       <default>true</default>
       <summary>Use keypad keys?</summary>
@@ -141,11 +148,11 @@
         Keybinding to switch to the app which is in the 9. place in dash.
       </description>
     </key>
-    <key name="app-key-shift1" type="as">
-      <default><![CDATA[['<Shift><Super>1']]]></default>
-      <summary>Keybinding to open a new window for 1. dash element</summary>
+    <key name="app-key-kp0" type="as">
+      <default><![CDATA[['<Super>KP_0']]]></default>
+      <summary>Keybinding to switch to 10. dash element</summary>
       <description>
-        Keybinding to open a new window for the app which is in the 1. place in dash.
+        Keybinding to switch to the app which is in the 10. place in dash.
       </description>
     </key>
     <key name="use-nw" type="b">
@@ -153,6 +160,13 @@
       <summary>Use new window keys?</summary>
       <description>
         Do you want to use shift to open new windows?
+      </description>
+    </key>
+    <key name="app-key-shift1" type="as">
+      <default><![CDATA[['<Shift><Super>1']]]></default>
+      <summary>Keybinding to open a new window for 1. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 1. place in dash.
       </description>
     </key>
     <key name="app-key-shift2" type="as">
@@ -209,6 +223,13 @@
       <summary>Keybinding to open a new window for 9. dash element</summary>
       <description>
         Keybinding to open a new window for the app which is in the 9. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift0" type="as">
+      <default><![CDATA[['<Shift><Super>0']]]></default>
+      <summary>Keybinding to open a new window for 10. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 10. place in dash.
       </description>
     </key>
     <key name="use-kp-nw" type="b">
@@ -279,6 +300,13 @@
       <summary>Keybinding to open a new window for 9. dash element</summary>
       <description>
         Keybinding to open a new window for the app which is in the 9. place in dash.
+      </description>
+    </key>
+    <key name="app-key-shift-kp0" type="as">
+      <default><![CDATA[['<Shift><Super>KP_0']]]></default>
+      <summary>Keybinding to open a new window for 10. dash element</summary>
+      <description>
+        Keybinding to open a new window for the app which is in the 10. place in dash.
       </description>
     </key>
   </schema>
