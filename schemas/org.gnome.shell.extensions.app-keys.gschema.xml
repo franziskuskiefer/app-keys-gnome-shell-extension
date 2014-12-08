@@ -309,5 +309,12 @@
         Keybinding to open a new window for the app which is in the 10. place in dash.
       </description>
     </key>
+    <key name="close-overview" type="b">
+      <default>true</default>
+      <summary>Close Overview?</summary>
+      <description>
+        Do you want the overview to close after selecting an application
+      </description>
+    </key>
   </schema>
 </schemalist>

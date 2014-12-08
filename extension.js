@@ -30,6 +30,7 @@ AppKeys.prototype = {
 		this.settings.connect('changed::' + config.SETTINGS_USE_NUMS, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_USE_NW, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_USE_NKP, Lang.bind(this, this.toggleKeys));
+		this.settings.connect('changed::' + config.SETTINGS_CLOSE_OVERVIEW, Lang.bind(this, this.toggleKeys));
 	},
 
 	//This is a javascript-closure which will return the event handler
@@ -56,6 +57,10 @@ AppKeys.prototype = {
 		            apps[id].open_new_window(-1);
 		        else
 		            apps[id].activate();
+		        
+		        // close overview after selecting application
+				if(options.closeoverview)
+			        Main.overview.hide();
 		    }
 		}
 	},
@@ -85,21 +90,22 @@ AppKeys.prototype = {
 		let enableNUM = this.settings.get_boolean(config.SETTINGS_USE_NUMS);
 		let enableNW = this.settings.get_boolean(config.SETTINGS_USE_NW);
 		let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
+		let close_overview = this.settings.get_boolean(config.SETTINGS_CLOSE_OVERVIEW);
 	
 		for(var i=0; i<10; i++) {
 			var j = i-1;
 			if (i == 0) j = 9;
 			if (enableNUM)
-				this._addKeybindings('app-key'+i, this.clickClosure(j));
+				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview}));
 	
 			if (enableNW)
-				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true}));
+				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview}));
 
 			if (enableNKP)
-				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true}));
+				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview}));
 
 			if (enableKP)
-				this._addKeybindings('app-key-kp'+i, this.clickClosure(j));
+				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview}));
 		}
 	},
 	

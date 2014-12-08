@@ -68,6 +68,10 @@ function buildPrefsWidget() {
 	label = "Enable Shift (NewWindow)";
 	tooltip = "Do you want to use Ctrl+Shift+Num to open new windows?";
 	addSetting(vbox, label, tooltip, config.SETTINGS_USE_NW);
+	
+	label = "Close Overview";
+	tooltip = "Do you want the overview to close after selecting an application?";
+	addSetting(vbox, label, tooltip, config.SETTINGS_CLOSE_OVERVIEW);
 
 	vbox.show_all();
 	return vbox;
