@@ -73,7 +73,7 @@ AppKeys.prototype = {
 
 	_addKeybindings: function(name, handler) {
 		if (Main.wm.addKeybinding)
-		   Main.wm.addKeybinding(name, this.settings, Meta.KeyBindingFlags.NONE, Shell.KeyBindingMode.NORMAL | Shell.KeyBindingMode.OVERVIEW, handler);
+		   Main.wm.addKeybinding(name, this.settings, Meta.KeyBindingFlags.NONE, Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW, handler);
 		else
 		   global.display.add_keybinding(name, this.settings, Meta.KeyBindingFlags.NONE, handler);
 	},
