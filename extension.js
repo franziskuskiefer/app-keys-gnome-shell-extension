@@ -38,8 +38,6 @@ AppKeys.prototype = {
 	clickClosure: function(id, options){
 		options = options || {};
 		return function(){
-		    Dash._redisplay(); // Re-order apps in dash before loading
-
 		    // Get the current actors from Dash, and get apps from the actors
 		    // This part is copied from the dash source (/usr/share/gnomes-shell/js/ui/dash.js)
 		    let children = Dash._box.get_children().filter(function(actor) {
