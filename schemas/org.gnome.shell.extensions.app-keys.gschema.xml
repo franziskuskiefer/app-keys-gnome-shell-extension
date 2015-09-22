@@ -313,7 +313,14 @@
       <default>true</default>
       <summary>Close Overview?</summary>
       <description>
-        Do you want the overview to close after selecting an application
+        Do you want the overview to close after selecting an application?
+      </description>
+    </key>
+    <key name="raise-first" type="b">
+      <default>false</default>
+      <summary>Raise First Window Only?</summary>
+      <description>
+        Do you want that only the first window of the application is raised?
       </description>
     </key>
   </schema>
