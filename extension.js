@@ -32,7 +32,7 @@ AppKeys.prototype = {
 		this.settings.connect('changed::' + config.SETTINGS_USE_NKP, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_CLOSE_OVERVIEW, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_RAISE_FIRST, Lang.bind(this, this.toggleKeys));
-        this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS, Lang.bind(this, this.toggleKeys));
+		this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS, Lang.bind(this, this.toggleKeys));
 	},
 
 	//This is a javascript-closure which will return the event handler
@@ -56,18 +56,18 @@ AppKeys.prototype = {
 		        if (options.newwindow || apps[id].get_windows().length == 0)
 		            apps[id].open_new_window(-1);
 		        else {
-                    if (options.cycleWindows) {
-                        if (apps[id].get_windows()[0].has_focus()) {
-                            apps[id].get_windows()[apps[id].get_windows().length - 1].activate(0);
-                        } else {
-                            apps[id].get_windows()[0].activate(0);
-                        }
-                    } else {
-                        if(options.raiseFirst) // raise only "first" (last used) window of the app
-                            apps[id].get_windows()[0].activate(0);
-                        else
-                            apps[id].activate();
-                    }
+		            if (options.cycleWindows) {
+		                if (apps[id].get_windows()[0].has_focus()) {
+		                    apps[id].get_windows()[apps[id].get_windows().length - 1].activate(0);
+		                } else {
+		                    apps[id].get_windows()[0].activate(0);
+		                }
+		            } else {
+		                if(options.raiseFirst) // raise only "first" (last used) window of the app
+		                    apps[id].get_windows()[0].activate(0);
+		                else
+		                    apps[id].activate();
+		            }
 		        }
 		        
 		    // close overview after selecting application
