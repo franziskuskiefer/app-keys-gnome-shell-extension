@@ -72,7 +72,11 @@ function buildPrefsWidget() {
 	label = "Close Overview";
 	tooltip = "Do you want the overview to close after selecting an application?";
 	addSetting(vbox, label, tooltip, config.SETTINGS_CLOSE_OVERVIEW);
-	
+
+    label = "Cycle Windows";
+    tooltip = "Do you want to cycle through windows using chosen keybindings?";
+    addSetting(vbox, label, tooltip, config.SETTINGS_CYCLE_WINDOWS);
+
 	label = "Raise First Window Only";
 	tooltip = "Do you want that only the first window of the application is raised?";
 	addSetting(vbox, label, tooltip, config.SETTINGS_RAISE_FIRST);

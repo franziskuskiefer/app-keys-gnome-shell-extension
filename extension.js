@@ -32,6 +32,7 @@ AppKeys.prototype = {
 		this.settings.connect('changed::' + config.SETTINGS_USE_NKP, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_CLOSE_OVERVIEW, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_RAISE_FIRST, Lang.bind(this, this.toggleKeys));
+        this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS, Lang.bind(this, this.toggleKeys));
 	},
 
 	//This is a javascript-closure which will return the event handler
@@ -52,13 +53,21 @@ AppKeys.prototype = {
 
 
 		    if(typeof(apps[id]) !== 'undefined') { // This is just to ignore problems when there is no such app (yet).
-		        if (options.newwindow)
+		        if (options.newwindow || apps[id].get_windows().length == 0)
 		            apps[id].open_new_window(-1);
 		        else {
-		        		if(options.raiseFirst) // raise only "first" (last used) window of the app
-		        				apps[id].get_windows()[0].activate(0);
-		        		else
-		            		apps[id].activate();
+                    if (options.cycleWindows) {
+                        if (apps[id].get_windows()[0].has_focus()) {
+                            apps[id].get_windows()[apps[id].get_windows().length - 1].activate(0);
+                        } else {
+                            apps[id].get_windows()[0].activate(0);
+                        }
+                    } else {
+                        if(options.raiseFirst) // raise only "first" (last used) window of the app
+                            apps[id].get_windows()[0].activate(0);
+                        else
+                            apps[id].activate();
+                    }
 		        }
 		        
 		    // close overview after selecting application
@@ -96,21 +105,22 @@ AppKeys.prototype = {
 		let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
 		let close_overview = this.settings.get_boolean(config.SETTINGS_CLOSE_OVERVIEW);
 		let raise_first = this.settings.get_boolean(config.SETTINGS_RAISE_FIRST);
+		let cycle_windows = this.settings.get_boolean(config.SETTINGS_CYCLE_WINDOWS);
 	
 		for(var i=0; i<10; i++) {
 			var j = i-1;
 			if (i == 0) j = 9;
 			if (enableNUM)
-				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first}));
+				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
 	
 			if (enableNW)
-				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview}));
+				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows}));
 
 			if (enableNKP)
-				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview}));
+				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows}));
 
 			if (enableKP)
-				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first}));
+				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
 		}
 	},
 	

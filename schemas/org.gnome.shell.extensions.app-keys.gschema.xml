@@ -316,6 +316,13 @@
         Do you want the overview to close after selecting an application?
       </description>
     </key>
+    <key name="cycle-windows" type="b">
+      <default>true</default>
+      <summary>Cycle Windows</summary>
+      <description>
+        Do you want to cycle through windows using chosen keybindings?
+      </description>
+    </key>
     <key name="raise-first" type="b">
       <default>false</default>
       <summary>Raise First Window Only?</summary>
