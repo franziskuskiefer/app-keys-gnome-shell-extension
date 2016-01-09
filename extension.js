@@ -25,7 +25,7 @@ AppKeys.prototype = {
 
 	init: function() {
 		this.settings = Convenience.getSettings();
-	
+
 		this.settings.connect('changed::' + config.SETTINGS_USE_KEYPAD, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_USE_NUMS, Lang.bind(this, this.toggleKeys));
 		this.settings.connect('changed::' + config.SETTINGS_USE_NW, Lang.bind(this, this.toggleKeys));
@@ -69,7 +69,7 @@ AppKeys.prototype = {
 		                    apps[id].activate();
 		            }
 		        }
-		        
+
 		    // close overview after selecting application
 				if(options.closeoverview)
 			        Main.overview.hide();
@@ -90,7 +90,7 @@ AppKeys.prototype = {
 		} else
 		   global.display.add_keybinding(name, this.settings, Meta.KeyBindingFlags.NONE, handler);
 	},
-	
+
 	_removeKeybindings: function(name) {
 		if (Main.wm.removeKeybinding)
         	Main.wm.removeKeybinding(name);
@@ -106,13 +106,13 @@ AppKeys.prototype = {
 		let close_overview = this.settings.get_boolean(config.SETTINGS_CLOSE_OVERVIEW);
 		let raise_first = this.settings.get_boolean(config.SETTINGS_RAISE_FIRST);
 		let cycle_windows = this.settings.get_boolean(config.SETTINGS_CYCLE_WINDOWS);
-	
+
 		for(var i=0; i<10; i++) {
 			var j = i-1;
 			if (i == 0) j = 9;
 			if (enableNUM)
 				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
-	
+
 			if (enableNW)
 				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows}));
 
@@ -123,7 +123,7 @@ AppKeys.prototype = {
 				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
 		}
 	},
-	
+
 	disable: function(){
 		for(var i=0; i<10; i++) {
 		    this._removeKeybindings('app-key'+i);
