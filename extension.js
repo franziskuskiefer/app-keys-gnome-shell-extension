@@ -51,20 +51,20 @@ AppKeys.prototype = {
 		            return actor.child._delegate.app;
 		        });
 
-
+            let windows = apps[id].get_windows();
 		    if(typeof(apps[id]) !== 'undefined') { // This is just to ignore problems when there is no such app (yet).
-		        if (options.newwindow || apps[id].get_windows().length == 0)
+		        if (options.newwindow || windows.length == 0)
 		            apps[id].open_new_window(-1);
 		        else {
 		            if (options.cycleWindows) {
-		                if (apps[id].get_windows()[0].has_focus()) {
-		                    apps[id].get_windows()[apps[id].get_windows().length - 1].activate(0);
+		                if (windows[0].has_focus()) {
+		                    windows[windows.length - 1].activate(0);
 		                } else {
-		                    apps[id].get_windows()[0].activate(0);
+		                    windows[0].activate(0);
 		                }
 		            } else {
 		                if(options.raiseFirst) // raise only "first" (last used) window of the app
-		                    apps[id].get_windows()[0].activate(0);
+		                    windows[0].activate(0);
 		                else
 		                    apps[id].activate();
 		            }
