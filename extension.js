@@ -52,6 +52,12 @@ AppKeys.prototype = {
 		        });
 
             let windows = apps[id].get_windows();
+            if (options.onlyActiveWorkspace) {
+                let activeWorkspace = global.screen.get_active_workspace();
+                windows = windows.filter(function (w) {
+                    return w.get_workspace() == activeWorkspace;
+                });
+            }
 		    if(typeof(apps[id]) !== 'undefined') { // This is just to ignore problems when there is no such app (yet).
 		        if (options.newwindow || windows.length == 0)
 		            apps[id].open_new_window(-1);
@@ -111,16 +117,16 @@ AppKeys.prototype = {
 			var j = i-1;
 			if (i == 0) j = 9;
 			if (enableNUM)
-				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
+				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
 
 			if (enableNW)
-				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows}));
+				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
 
 			if (enableNKP)
-				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows}));
+				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
 
 			if (enableKP)
-				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows}));
+				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
 		}
 	},
 
