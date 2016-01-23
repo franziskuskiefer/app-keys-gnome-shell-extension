@@ -8,7 +8,6 @@ const Shell = imports.gi.Shell;
 // Import Dash also
 const Dash = Main.overview._dash;
 
-
 // Import the convenience.js (Used for loading settings schemas)
 const Self = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Self.imports.convenience;
@@ -17,127 +16,132 @@ const Convenience = Self.imports.convenience;
 const config = Self.imports.config;
 
 function AppKeys() {
-	this.init();
+  this.init();
 }
 
 AppKeys.prototype = {
-	Name: 'AppKeys',
+  Name : 'AppKeys',
 
-	init: function() {
-		this.settings = Convenience.getSettings();
+  init : function() {
+    this.settings = Convenience.getSettings();
 
-		this.settings.connect('changed::' + config.SETTINGS_USE_KEYPAD, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_USE_NUMS, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_USE_NW, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_USE_NKP, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_CLOSE_OVERVIEW, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_RAISE_FIRST, Lang.bind(this, this.toggleKeys));
-		this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS, Lang.bind(this, this.toggleKeys));
-	},
+    this.settings.connect('changed::' + config.SETTINGS_USE_KEYPAD, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_USE_NUMS, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_USE_NW, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_USE_NKP, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_CLOSE_OVERVIEW, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_RAISE_FIRST, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS, Lang.bind(this, this.toggleKeys));
+    this.settings.connect('changed::' + config.SETTINGS_CYCLE_WINDOWS_ON_ACTIVE_ONLY, Lang.bind(this, this.toggleKeys));
+  },
 
-	//This is a javascript-closure which will return the event handler
-	//for each hotkey with it's id. (id=1 For <Super>+1 etc)
-	clickClosure: function(id, options){
-		options = options || {};
-		return function(){
-		    // Get the current actors from Dash, and get apps from the actors
-		    // This part is copied from the dash source (/usr/share/gnomes-shell/js/ui/dash.js)
-		    let children = Dash._box.get_children().filter(function(actor) {
-		            return actor.child &&
-		                   actor.child._delegate &&
-		                   actor.child._delegate.app;
-		        });
-		    let apps = children.map(function(actor) {
-		            return actor.child._delegate.app;
-		        });
+  //This is a javascript-closure which will return the event handler
+  //for each hotkey with it's id. (id=1 For <Super>+1 etc)
+  clickClosure : function(id, options) {
+    options = options || {};
+    return function() {
+      // Get the current actors from Dash, and get apps from the actors
+      // This part is copied from the dash source (/usr/share/gnomes-shell/js/ui/dash.js)
+      let children = Dash._box.get_children().filter(function(actor) {
+        return actor.child &&
+               actor.child._delegate &&
+               actor.child._delegate.app;
+      });
+      let apps = children.map(function(actor) {
+        return actor.child._delegate.app;
+      });
 
-            let windows = apps[id].get_windows();
-            if (options.onlyActiveWorkspace) {
-                let activeWorkspace = global.screen.get_active_workspace();
-                windows = windows.filter(function (w) {
-                    return w.get_workspace() == activeWorkspace;
-                });
+      let windows = apps[id].get_windows();
+      if (options.onlyActiveWorkspace) {
+        let activeWorkspace = global.screen.get_active_workspace();
+        windows = windows.filter(function(w) {
+          return w.get_workspace() == activeWorkspace;
+        });
+      }
+      if (typeof(apps[id]) !== 'undefined') {  // This is just to ignore problems when there is no such app (yet).
+        if (options.newwindow || windows.length == 0)
+          apps[id].open_new_window(-1);
+        else {
+          if (options.cycleWindows) {
+            if (windows[0].has_focus()) {
+              windows[windows.length - 1].activate(0);
+            } else {
+              windows[0].activate(0);
             }
-		    if(typeof(apps[id]) !== 'undefined') { // This is just to ignore problems when there is no such app (yet).
-		        if (options.newwindow || windows.length == 0)
-		            apps[id].open_new_window(-1);
-		        else {
-		            if (options.cycleWindows) {
-		                if (windows[0].has_focus()) {
-		                    windows[windows.length - 1].activate(0);
-		                } else {
-		                    windows[0].activate(0);
-		                }
-		            } else {
-		                if(options.raiseFirst) // raise only "first" (last used) window of the app
-		                    windows[0].activate(0);
-		                else
-		                    apps[id].activate();
-		            }
-		        }
+          } else {
+            if (options.raiseFirst)  // raise only "first" (last used) window of the app
+              windows[0].activate(0);
+            else
+              apps[id].activate();
+          }
+        }
 
-		    // close overview after selecting application
-				if(options.closeoverview)
-			        Main.overview.hide();
-		    }
-		}
-	},
+        // close overview after selecting application
+        if (options.closeoverview)
+          Main.overview.hide();
+      }
+    }
+  },
 
-	toggleKeys: function() {
-		// TODO: could be done nicer
-		this.disable();
-		this.enable();
-	},
+  toggleKeys : function() {
+    // TODO: could be done nicer
+    this.disable();
+    this.enable();
+  },
 
-	_addKeybindings: function(name, handler) {
-		if (Main.wm.addKeybinding) {
-		   var ModeType = Shell.hasOwnProperty('ActionMode') ? Shell.ActionMode : Shell.KeyBindingMode;
-		   Main.wm.addKeybinding(name, this.settings, Meta.KeyBindingFlags.NONE, ModeType.NORMAL | ModeType.OVERVIEW, handler);
-		} else
-		   global.display.add_keybinding(name, this.settings, Meta.KeyBindingFlags.NONE, handler);
-	},
+  _addKeybindings : function(name, handler) {
+    if (Main.wm.addKeybinding) {
+      var ModeType = Shell.hasOwnProperty('ActionMode') ? Shell.ActionMode : Shell.KeyBindingMode;
+      Main.wm.addKeybinding(name, this.settings, Meta.KeyBindingFlags.NONE, ModeType.NORMAL | ModeType.OVERVIEW, handler);
+    } else {
+      global.display.add_keybinding(name, this.settings, Meta.KeyBindingFlags.NONE, handler);
+    }
+  },
 
-	_removeKeybindings: function(name) {
-		if (Main.wm.removeKeybinding)
-        	Main.wm.removeKeybinding(name);
-		else
-		   global.display.remove_keybinding(name);
-	},
+  _removeKeybindings : function(name) {
+    if (Main.wm.removeKeybinding) {
+      Main.wm.removeKeybinding(name);
+    }
+    else {
+      global.display.remove_keybinding(name);
+    }
+  },
 
-	enable: function(){
-		let enableKP = this.settings.get_boolean(config.SETTINGS_USE_KEYPAD);
-		let enableNUM = this.settings.get_boolean(config.SETTINGS_USE_NUMS);
-		let enableNW = this.settings.get_boolean(config.SETTINGS_USE_NW);
-		let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
-		let close_overview = this.settings.get_boolean(config.SETTINGS_CLOSE_OVERVIEW);
-		let raise_first = this.settings.get_boolean(config.SETTINGS_RAISE_FIRST);
-		let cycle_windows = this.settings.get_boolean(config.SETTINGS_CYCLE_WINDOWS);
+  enable : function() {
+    let enableKP = this.settings.get_boolean(config.SETTINGS_USE_KEYPAD);
+    let enableNUM = this.settings.get_boolean(config.SETTINGS_USE_NUMS);
+    let enableNW = this.settings.get_boolean(config.SETTINGS_USE_NW);
+    let enableNKP = this.settings.get_boolean(config.SETTINGS_USE_NKP);
+    let close_overview = this.settings.get_boolean(config.SETTINGS_CLOSE_OVERVIEW);
+    let raise_first = this.settings.get_boolean(config.SETTINGS_RAISE_FIRST);
+    let cycle_windows = this.settings.get_boolean(config.SETTINGS_CYCLE_WINDOWS);
+    let cycle_windows_on_active = this.settings.get_boolean(config.SETTINGS_CYCLE_WINDOWS_ON_ACTIVE_ONLY);
 
-		for(var i=0; i<10; i++) {
-			var j = i-1;
-			if (i == 0) j = 9;
-			if (enableNUM)
-				this._addKeybindings('app-key'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
+    for (var i = 0; i < 10; i++) {
+      var j = i - 1;
+      if (i == 0) j = 9;
+      if (enableNUM)
+        this._addKeybindings('app-key' + i, this.clickClosure(j, {closeoverview : close_overview, raiseFirst : raise_first, cycleWindows : cycle_windows, onlyActiveWorkspace : cycle_windows_on_active}));
 
-			if (enableNW)
-				this._addKeybindings('app-key-shift'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
+      if (enableNW)
+        this._addKeybindings('app-key-shift' + i, this.clickClosure(j, {newwindow : true, closeoverview : close_overview, cycleWindows : cycle_windows, onlyActiveWorkspace : cycle_windows_on_active}));
 
-			if (enableNKP)
-				this._addKeybindings('app-key-shift-kp'+i, this.clickClosure(j, {newwindow: true, closeoverview: close_overview, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
+      if (enableNKP)
+        this._addKeybindings('app-key-shift-kp' + i, this.clickClosure(j, {newwindow : true, closeoverview : close_overview, cycleWindows : cycle_windows, onlyActiveWorkspace : cycle_windows_on_active}));
 
-			if (enableKP)
-				this._addKeybindings('app-key-kp'+i, this.clickClosure(j, {closeoverview: close_overview, raiseFirst: raise_first, cycleWindows: cycle_windows, onlyActiveWorkspace: true}));
-		}
-	},
+      if (enableKP)
+        this._addKeybindings('app-key-kp' + i, this.clickClosure(j, {closeoverview : close_overview, raiseFirst : raise_first, cycleWindows : cycle_windows, onlyActiveWorkspace : cycle_windows_on_active}));
+    }
+  },
 
-	disable: function(){
-		for(var i=0; i<10; i++) {
-		    this._removeKeybindings('app-key'+i);
-		    this._removeKeybindings('app-key-shift'+i);
-		    this._removeKeybindings('app-key-kp'+i);
-		    this._removeKeybindings('app-key-shift-kp'+i);
-		}
-	}
+  disable : function() {
+    for (var i = 0; i < 10; i++) {
+      this._removeKeybindings('app-key' + i);
+      this._removeKeybindings('app-key-shift' + i);
+      this._removeKeybindings('app-key-kp' + i);
+      this._removeKeybindings('app-key-shift-kp' + i);
+    }
+  }
 
 };
 
@@ -145,13 +149,13 @@ let app;
 
 // create app keys app
 function init() {
-	app = new AppKeys();
+  app = new AppKeys();
 }
 
 function enable() {
-	app.enable();
+  app.enable();
 }
 
 function disable() {
-    app.disable();
+  app.disable();
 }

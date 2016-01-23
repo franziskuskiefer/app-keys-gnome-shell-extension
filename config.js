@@ -7,3 +7,4 @@ const SETTINGS_USE_NKP = "use-kp-nw";
 const SETTINGS_CLOSE_OVERVIEW = "close-overview";
 const SETTINGS_RAISE_FIRST = "raise-first";
 const SETTINGS_CYCLE_WINDOWS = "cycle-windows";
+const SETTINGS_CYCLE_WINDOWS_ON_ACTIVE_ONLY = "cycle-windows-active";
