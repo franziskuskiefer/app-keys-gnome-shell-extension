@@ -327,7 +327,7 @@
       <default>true</default>
       <summary>Cycle Windows on Active Workspace</summary>
       <description>
-        Do you want to cycle through windows using chosen keybindings on active windows only?
+        Do you want to cycle through windows using chosen keybindings on active workspace only?
       </description>
     </key>
     <key name="raise-first" type="b">
