@@ -77,7 +77,7 @@ function buildPrefsWidget() {
   addSetting(vbox, label, tooltip, config.SETTINGS_CYCLE_WINDOWS);
 
   label = "Cycle Windows on Active Workspace";
-  tooltip = "Do you want to cycle through windows using chosen keybindings on active windows only?\n" +
+  tooltip = "Do you want to cycle through windows using chosen keybindings on active workspace only?\n" +
             "This requires Cycle Windows to be enabled";
   addSetting(vbox, label, tooltip, config.SETTINGS_CYCLE_WINDOWS_ON_ACTIVE_ONLY);
 
