@@ -56,7 +56,7 @@ function buildPrefsWidget() {
   addSetting(vbox, label, tooltip, config.SETTINGS_USE_KEYPAD);
 
   label = "Enable Shift KP (NewWindow)";
-  tooltip = "Do you want to use Ctrl+Shift+KP_N to open new windows?";
+  tooltip = "Do you want to use Super+Shift+KP_N to open new windows?";
   addSetting(vbox, label, tooltip, config.SETTINGS_USE_NKP);
 
   label = "Enable Nums";
@@ -64,7 +64,7 @@ function buildPrefsWidget() {
   addSetting(vbox, label, tooltip, config.SETTINGS_USE_NUMS);
 
   label = "Enable Shift (NewWindow)";
-  tooltip = "Do you want to use Ctrl+Shift+Num to open new windows?";
+  tooltip = "Do you want to use Super+Shift+Num to open new windows?";
   addSetting(vbox, label, tooltip, config.SETTINGS_USE_NW);
 
   label = "Close Overview";
