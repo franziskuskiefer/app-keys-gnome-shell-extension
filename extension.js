@@ -69,8 +69,14 @@ AppKeys.prototype = {
               windows[0].activate(0);
             }
           } else {
-            if (options.raiseFirst)  // raise only "first" (last used) window of the app
-              windows[0].activate(0);
+            if (options.raiseFirst) { // raise only "first" (last used) window of the app
+              if (windows[0].has_focus()){
+                  windows[0].minimize();
+              }
+              else {
+                  windows[0].activate(0);
+              }
+          }
             else
               apps[id].activate();
           }
