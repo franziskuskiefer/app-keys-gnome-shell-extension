@@ -5,8 +5,6 @@ const Lang = imports.lang;
 
 // Import shell
 const Shell = imports.gi.Shell;
-// Import Dash also
-const Dash = Main.overview._dash;
 
 // Import the convenience.js (Used for loading settings schemas)
 const Self = imports.misc.extensionUtils.getCurrentExtension();
@@ -42,6 +40,8 @@ AppKeys.prototype = {
     return function() {
       // Get the current actors from Dash, and get apps from the actors
       // This part is copied from the dash source (/usr/share/gnomes-shell/js/ui/dash.js)
+      // Import Dash
+      const Dash = Main.overview._dash;
       let children = Dash._box.get_children().filter(function(actor) {
         return actor.child &&
                actor.child._delegate &&
