@@ -51,7 +51,9 @@ AppKeys.prototype = {
         return actor.child._delegate.app;
       });
 
-      let windows = apps[id].get_windows();
+      let windows = apps[id].get_windows().filter(function(w) {
+        return !w.skip_taskbar;
+      });
       if (options.onlyActiveWorkspace) {
         let activeWorkspace = global.screen.get_active_workspace();
         windows = windows.filter(function(w) {
