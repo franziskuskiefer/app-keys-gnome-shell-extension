@@ -66,9 +66,9 @@ AppKeys.prototype = {
         else {
           if (options.cycleWindows) {
             if (windows[0].has_focus()) {
-              windows[windows.length - 1].activate(0);
+              Main.activateWindow(windows[windows.length - 1]);
             } else {
-              windows[0].activate(0);
+              Main.activateWindow(windows[0]);
             }
           } else {
             if (options.raiseFirst)  // raise only "first" (last used) window of the app
