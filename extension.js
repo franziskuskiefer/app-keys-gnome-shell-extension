@@ -14,10 +14,6 @@ const Convenience = Self.imports.convenience;
 // Import config
 const config = Self.imports.config;
 
-let recentlyClickedAppLoopId = 0;
-let recentlyClickedApp = null;
-let recentlyClickedAppWindows = null;
-let recentlyClickedAppIndex = 0;
 function AppKeys() {
   this.init();
 }
@@ -152,40 +148,47 @@ AppKeys.prototype = {
 
 };
 
+let recentlyClickedAppLoopId = 0;
+let recentlyClickedApp = null;
+let recentlyClickedAppWindows = null;
+let recentlyClickedAppIndex = 0;
+
+// This function was ported straight from Dash-to-Dock
 function cycleThroughWindows(app, app_windows) {
-    // Store for a little amount of time last clicked app and its windows
-    // since the order changes upon window interaction
-    let MEMORY_TIME=3000;
+  // Store for a little amount of time last clicked app and its windows
+  // since the order changes upon window interaction
+  let MEMORY_TIME=3000;
 
-    if (recentlyClickedAppLoopId > 0)
-        Mainloop.source_remove(recentlyClickedAppLoopId);
-    recentlyClickedAppLoopId = Mainloop.timeout_add(MEMORY_TIME, resetRecentlyClickedApp);
+  if (recentlyClickedAppLoopId > 0)
+      Mainloop.source_remove(recentlyClickedAppLoopId);
+  recentlyClickedAppLoopId = Mainloop.timeout_add(MEMORY_TIME, resetRecentlyClickedApp);
 
-    // If there isn't already a list of windows for the current app,
-    // or the stored list is outdated, use the current windows list.
-    if (!recentlyClickedApp ||
-        recentlyClickedApp.get_id() != app.get_id() ||
-        recentlyClickedAppWindows.length != app_windows.length) {
-        recentlyClickedApp = app;
-        recentlyClickedAppWindows = app_windows;
-        recentlyClickedAppIndex = 0;
-    }
-
-    recentlyClickedAppIndex++;
-    let index = recentlyClickedAppIndex % recentlyClickedAppWindows.length;
-    let window = recentlyClickedAppWindows[index];
-
-    Main.activateWindow(window);
-}
-function resetRecentlyClickedApp() {
-    if (recentlyClickedAppLoopId > 0)
-        Mainloop.source_remove(recentlyClickedAppLoopId);
-    recentlyClickedAppLoopId=0;
-    recentlyClickedApp =null;
-    recentlyClickedAppWindows = null;
+  // If there isn't already a list of windows for the current app,
+  // or the stored list is outdated, use the current windows list.
+  if (!recentlyClickedApp ||
+    recentlyClickedApp.get_id() != app.get_id() ||
+    recentlyClickedAppWindows.length != app_windows.length) {
+    recentlyClickedApp = app;
+    recentlyClickedAppWindows = app_windows;
     recentlyClickedAppIndex = 0;
+  }
 
-    return false;
+  recentlyClickedAppIndex++;
+  let index = recentlyClickedAppIndex % recentlyClickedAppWindows.length;
+  let window = recentlyClickedAppWindows[index];
+
+  Main.activateWindow(window);
+}
+
+function resetRecentlyClickedApp() {
+  if (recentlyClickedAppLoopId > 0)
+    Mainloop.source_remove(recentlyClickedAppLoopId);
+  recentlyClickedAppLoopId=0;
+  recentlyClickedApp =null;
+  recentlyClickedAppWindows = null;
+  recentlyClickedAppIndex = 0;
+
+  return false;
 }
 
 let app;
