@@ -5,6 +5,3 @@ Adds Super+NUM shortcuts for activating applications from dash.
 Extension can be installed from https://extensions.gnome.org/extension/413/dash-hotkeys/
 
 Works with latest Gnome Shell versions: 3.8, 3.10, 3.12, 3.14, 3.16, 3.18., 3.20
-
-Fork changes:
-Added ability to toggle when trying to activate an in-focus window.
