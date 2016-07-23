@@ -1,5 +1,6 @@
 //Import the Main and Meta object
 const Main = imports.ui.main;
+const Mainloop = imports.mainloop;
 const Meta = imports.gi.Meta;
 const Lang = imports.lang;
 
@@ -66,9 +67,9 @@ AppKeys.prototype = {
         else {
           if (options.cycleWindows) {
             if (windows[0].has_focus()) {
-              windows[windows.length - 1].activate(0);
+              cycleThroughWindows(apps[id], windows);
             } else {
-              windows[0].activate(0);
+              Main.activateWindow(windows[0]);
             }
           } else {
             if (options.raiseFirst)  // raise only "first" (last used) window of the app
@@ -146,6 +147,49 @@ AppKeys.prototype = {
   }
 
 };
+
+let recentlyClickedAppLoopId = 0;
+let recentlyClickedApp = null;
+let recentlyClickedAppWindows = null;
+let recentlyClickedAppIndex = 0;
+
+// This function was ported straight from Dash-to-Dock
+function cycleThroughWindows(app, app_windows) {
+  // Store for a little amount of time last clicked app and its windows
+  // since the order changes upon window interaction
+  let MEMORY_TIME=3000;
+
+  if (recentlyClickedAppLoopId > 0)
+      Mainloop.source_remove(recentlyClickedAppLoopId);
+  recentlyClickedAppLoopId = Mainloop.timeout_add(MEMORY_TIME, resetRecentlyClickedApp);
+
+  // If there isn't already a list of windows for the current app,
+  // or the stored list is outdated, use the current windows list.
+  if (!recentlyClickedApp ||
+    recentlyClickedApp.get_id() != app.get_id() ||
+    recentlyClickedAppWindows.length != app_windows.length) {
+    recentlyClickedApp = app;
+    recentlyClickedAppWindows = app_windows;
+    recentlyClickedAppIndex = 0;
+  }
+
+  recentlyClickedAppIndex++;
+  let index = recentlyClickedAppIndex % recentlyClickedAppWindows.length;
+  let window = recentlyClickedAppWindows[index];
+
+  Main.activateWindow(window);
+}
+
+function resetRecentlyClickedApp() {
+  if (recentlyClickedAppLoopId > 0)
+    Mainloop.source_remove(recentlyClickedAppLoopId);
+  recentlyClickedAppLoopId=0;
+  recentlyClickedApp =null;
+  recentlyClickedAppWindows = null;
+  recentlyClickedAppIndex = 0;
+
+  return false;
+}
 
 let app;
 
