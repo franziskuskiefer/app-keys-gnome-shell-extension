@@ -144,11 +144,17 @@ AppKeys.prototype = {
   },
 
   disable : function() {
+    let enableNUM = this.settings.get_boolean(config.SETTINGS_USE_NUMS);
+    let enableKP = this.settings.get_boolean(config.SETTINGS_USE_KEYPAD);
     for (var i = 0; i < 10; i++) {
-      this._removeKeybindings('app-key' + i);
-      this._removeKeybindings('app-key-shift' + i);
-      this._removeKeybindings('app-key-kp' + i);
-      this._removeKeybindings('app-key-shift-kp' + i);
+      if (enableNUM) {
+        this._removeKeybindings('app-key' + i);
+        this._removeKeybindings('app-key-shift' + i);
+      }
+      if (enableKP) {
+        this._removeKeybindings('app-key-kp' + i);
+        this._removeKeybindings('app-key-shift-kp' + i);
+      }
     }
   }
 
