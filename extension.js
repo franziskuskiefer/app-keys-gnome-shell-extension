@@ -56,7 +56,7 @@ AppKeys.prototype = {
         return !w.skip_taskbar;
       });
       if (options.onlyActiveWorkspace) {
-        let activeWorkspace = global.screen.get_active_workspace();
+        let activeWorkspace = (global.screen || global.workspace_manager).get_active_workspace();
         windows = windows.filter(function(w) {
           return w.get_workspace() == activeWorkspace;
         });
