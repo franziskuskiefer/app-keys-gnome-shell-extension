@@ -42,7 +42,7 @@ AppKeys.prototype = {
       // Get the current actors from Dash, and get apps from the actors
       // This part is copied from the dash source (/usr/share/gnomes-shell/js/ui/dash.js)
       // Import Dash
-      const Dash = Main.overview.dash;
+      const Dash = Main.overview.dash || Main.overview._dash;
       let children = Dash._box.get_children().filter(function(actor) {
         return actor.child &&
                actor.child._delegate &&
